@@ -7,8 +7,8 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 /* 
- * @route   GET api/users
- * @desc    Test Route
+ * @route   POST api/users
+ * @desc    Register user
  * @access  Public
  */
 router.post('/', [
@@ -68,7 +68,7 @@ router.post('/', [
                 if(error) throw error;
                 res.json({ token });
             });
-            
+
     } catch (error) {
         console.log(error.message);
         res.status(500).send('Server Error');
