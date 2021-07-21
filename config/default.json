@@ -1,5 +1,7 @@
 {
     "mongoURI": "mongodb+srv://palpitescampeonato:zVQxjZjoUPa75xoS@tiagomiranda.iako4.mongodb.net/palpitescampeonato?retryWrites=true&w=majority",
-    "jwtToken": "mysecrettoken"
+    "jwtToken": "mysecrettoken",
+    "githubClientId": "fda1e28691825f7f1e81",
+    "githubSecret": "19b192d4aa455b071c1fb9d7453513b7e4eb8cda"
 }
 
