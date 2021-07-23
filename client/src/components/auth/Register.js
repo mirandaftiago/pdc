@@ -1,4 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import React, { Fragment, useState } from "react";
+import axios from "axios";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -8,26 +11,46 @@ const Register = () => {
     passwordTwo: "",
   });
 
+  const { name, email, password, passwordTwo } = formData;
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const { name, email, password, passwordTwo } = formData;
-  const onSubmit = e => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if(password !== passwordTwo) {
-      console.log('Passwords do not match');
+    if (password !== passwordTwo) {
+      console.log("Passwords do not match");
     } else {
-      console.log(formData);
+      const newUser = {
+        name,
+        email,
+        password,
+      };
+
+      try {
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const body = JSON.stringify(newUser);
+        const res = await axios.post("/api/users", body, config);
+        console.log(res.data);
+      } catch (error) {
+        console.error(error.response.data);
+      }
     }
-  }
+  };
 
   return (
     <Fragment>
       <section className="container">
         <h1 className="large text-primary">Sign Up</h1>
         <p className="lead">
-          <i className="fas fa-user"></i> Create Your Account
+          <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>Create Your Account
         </p>
-        <form className="form" onSubmit={e => onSubmit(e)}>
+        <form className="form" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group">
             <input
               type="text"
